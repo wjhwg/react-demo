@@ -14,9 +14,12 @@ class Todu extends Component{
             <Fragment>
                 <div>
                     <input value = {this.state.inputValue} onChange = {this.handlerInputChange.bind(this)} />
-                    <button>添加</button>
+                    <button onClick = {this.btnClick.bind(this)}>添加</button>
                 </div>
                 <ul>
+                    { this.state.list.map((value, index) => {
+                        return <li key={index}>{value}</li>
+                    }) }
                     <li>hello</li>
                 </ul>
             </Fragment>
@@ -27,7 +30,13 @@ class Todu extends Component{
         this.setState({
             inputValue: e.target.value
         })
-        console.log(e);
+    }
+
+    btnClick(){
+        this.setState({
+            list: [...this.state.list, this.state.inputValue],
+            inputValue: ''
+        })
     }
 }
 
