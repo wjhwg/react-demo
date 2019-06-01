@@ -17,10 +17,11 @@ class Todu extends Component{
                     <button onClick = {this.btnClick.bind(this)}>添加</button>
                 </div>
                 <ul>
-                    { this.state.list.map((value, index) => {
-                        return <li key={index}>{value}</li>
-                    }) }
-                    <li>hello</li>
+                    { 
+                        this.state.list.map((value, index) => {
+                            return <li key={index} onClick={this.btnClickDelete.bind(this, index)}>{value}</li>
+                        })
+                    }
                 </ul>
             </Fragment>
         )
@@ -36,6 +37,14 @@ class Todu extends Component{
         this.setState({
             list: [...this.state.list, this.state.inputValue],
             inputValue: ''
+        })
+    }
+
+    btnClickDelete(index){
+        const list = [...this.state.list];
+        list.splice(index, 1);
+        this.setState({
+            list: list
         })
     }
 }
