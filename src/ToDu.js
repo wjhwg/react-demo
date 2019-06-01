@@ -13,13 +13,15 @@ class Todu extends Component{
         return (
             <Fragment>
                 <div>
-                    <input value = {this.state.inputValue} onChange = {this.handlerInputChange.bind(this)} />
+                    <label htmlFor="insert">Input Value</label>
+                    {/* 輸入框 */}
+                    <input id="insert" value = {this.state.inputValue} onChange = {this.handlerInputChange.bind(this)} />
                     <button onClick = {this.btnClick.bind(this)}>添加</button>
                 </div>
                 <ul>
                     { 
                         this.state.list.map((value, index) => {
-                            return <li key={index} onClick={this.btnClickDelete.bind(this, index)}>{value}</li>
+                            return <li key={index} onClick={this.btnClickDelete.bind(this, index)} dangerouslySetInnerHTML={{__html: value}}></li>
                         })
                     }
                 </ul>
