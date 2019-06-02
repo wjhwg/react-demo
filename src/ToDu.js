@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-
+import ToDuItem from './ToDuItem'
 class Todu extends Component{
     constructor(props){
         super(props)
@@ -21,7 +21,12 @@ class Todu extends Component{
                 <ul>
                     { 
                         this.state.list.map((value, index) => {
-                            return <li key={index} onClick={this.btnClickDelete.bind(this, index)} dangerouslySetInnerHTML={{__html: value}}></li>
+                            return (
+                                <div><ToDuItem content={value} deleteItem={this.btnClickDelete.bind(this) } index={index}></ToDuItem></div>
+                            ) 
+                            {/* 
+                                <li key={index} onClick={this.btnClickDelete.bind(this, index)} dangerouslySetInnerHTML={{__html: value}}></li>
+                            */}
                         })
                     }
                 </ul>
