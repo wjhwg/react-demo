@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-
+import PropTypes from 'prop-types';
 class ToDuItem extends Component{
 
     constructor(props){
@@ -7,9 +7,9 @@ class ToDuItem extends Component{
         this.deleteValue = this.deleteValue.bind(this)
     }
     render() {
-        const {content} = this.props;
+        const {content, test} = this.props;
         return (
-            <div onClick={this.deleteValue}>{content}</div>
+            <div onClick={this.deleteValue}>{content}-{test}</div>
         )
     }
 
@@ -18,5 +18,12 @@ class ToDuItem extends Component{
         deleteItem(index);
     }
 }
+ToDuItem.propTypes = {
+      content: PropTypes.string.isRequired,
+      test: PropTypes.string.isRequired  
+}
 
+ToDuItem.defaultProps = {
+    test: 'helloworld'
+}
 export default ToDuItem;
