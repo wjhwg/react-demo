@@ -21,7 +21,7 @@ class Todu extends Component{
                     <input id="insert" value = {this.state.inputValue} onChange = {this.handlerInputChange} />
                     <button onClick = {this.btnClick}>添加</button>
                 </div>
-                <ul>
+                <ul ref={(ul) => { this.ul = ul }}>
                     { 
                         this.getItem()
                     }
@@ -49,6 +49,8 @@ class Todu extends Component{
         this.setState({
             list: [...this.state.list, this.state.inputValue],
             inputValue: ''
+        }, () => {
+            console.log(this.ul.querySelectorAll('div').length);
         })
     }
 
