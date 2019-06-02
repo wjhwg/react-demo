@@ -7,6 +7,9 @@ class Todu extends Component{
             inputValue : '',
             list : []
         }
+        this.handlerInputChange = this.handlerInputChange.bind(this);
+        this.btnClick = this.btnClick.bind(this);
+        this.btnClickDelete = this.btnClickDelete.bind(this);
     }
 
     render() {
@@ -15,29 +18,31 @@ class Todu extends Component{
                 <div>
                     <label htmlFor="insert">Input Value</label>
                     {/* 輸入框 */}
-                    <input id="insert" value = {this.state.inputValue} onChange = {this.handlerInputChange.bind(this)} />
-                    <button onClick = {this.btnClick.bind(this)}>添加</button>
+                    <input id="insert" value = {this.state.inputValue} onChange = {this.handlerInputChange} />
+                    <button onClick = {this.btnClick}>添加</button>
                 </div>
                 <ul>
                     { 
-                        this.state.list.map((value, index) => {
-                            return (
-                                <div><ToDuItem content={value} deleteItem={this.btnClickDelete.bind(this) } index={index}></ToDuItem></div>
-                            ) 
-                            {/* 
-                                <li key={index} onClick={this.btnClickDelete.bind(this, index)} dangerouslySetInnerHTML={{__html: value}}></li>
-                            */}
-                        })
+                        this.getItem()
                     }
                 </ul>
             </Fragment>
         )
     }
 
-    handlerInputChange(e){
-        this.setState({
-            inputValue: e.target.value
+    getItem(){
+        return  this.state.list.map((value, index) => {
+            return (
+                <ToDuItem content={value} deleteItem={this.btnClickDelete} index={index} key={index}></ToDuItem>
+            ) 
         })
+    }
+
+    handlerInputChange(e){
+        const value = e.target.value;
+        this.setState(() => ({
+            inputValue: value
+        }));
     }
 
     btnClick(){
@@ -48,10 +53,12 @@ class Todu extends Component{
     }
 
     btnClickDelete(index){
-        const list = [...this.state.list];
-        list.splice(index, 1);
-        this.setState({
-            list: list
+        this.setState( () => {
+            const list = [...this.state.list];
+            list.splice(index, 1);
+            return {
+                list
+            }
         })
     }
 }
