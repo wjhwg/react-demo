@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-
+import {CSSTransition} from 'react-transition-group';
 class Animation extends Component{
     constructor(props){
         super(props);
@@ -12,7 +12,12 @@ class Animation extends Component{
     render() {
         return (
             <Fragment>
-                <div className={ this.state.show ? 'show' : 'hide'}>Hello</div>
+                <CSSTransition in={this.state.show}
+                onEntered={(e) => { e.style.color='red'}}
+                appear={true}
+                timeout={2000} classNames="my-node">
+                    <div>Hello</div>
+                </CSSTransition>
                 <button onClick={ this.cltBtn }>點擊</button>
             </Fragment>
         )
