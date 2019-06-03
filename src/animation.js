@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import {CSSTransition} from 'react-transition-group';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 class Animation extends Component{
     constructor(props){
         super(props);
         this.state = {
-            show: true
+            show: true,
+            list: []
         };
         this.cltBtn = this.cltBtn.bind(this);
     }
@@ -12,20 +13,37 @@ class Animation extends Component{
     render() {
         return (
             <Fragment>
-                <CSSTransition in={this.state.show}
+                <TransitionGroup>
+                    { this.state.list.map((item, index) => {
+                        return (
+                            <CSSTransition
+                            onEntered={(e) => { e.style.color='red'}}
+                            appear={true} unmountOnExit key={index}
+                            timeout={2000} classNames="my-node">
+                                <div>{item}</div>
+                            </CSSTransition>    
+                        )
+                    })}
+                </TransitionGroup>
+                {/* <CSSTransition in={this.state.show}
                 onEntered={(e) => { e.style.color='red'}}
-                appear={true}
+                appear={true} unmountOnExit
                 timeout={2000} classNames="my-node">
                     <div>Hello</div>
-                </CSSTransition>
+                </CSSTransition> */}
                 <button onClick={ this.cltBtn }>點擊</button>
             </Fragment>
         )
     }
 
     cltBtn(){
-        this.setState({
-            show: this.state.show ? false : true
+        // this.setState({
+        //     show: this.state.show ? false : true
+        // })
+        this.setState((prevState)=>{
+            return {
+                list: [...prevState.list, 'item']
+            }
         })
     }
 }
