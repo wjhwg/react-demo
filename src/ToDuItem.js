@@ -7,12 +7,19 @@ class ToDuItem extends Component{
         this.deleteValue = this.deleteValue.bind(this)
     }
     render() {
+        console.log('children')
         const {content, test} = this.props;
         return (
             <div onClick={this.deleteValue}>{content}-{test}</div>
         )
     }
-
+    shouldComponentUpdate( nextProps, nextState){
+        if(nextProps.content !== this.props.content){
+            return true;
+        }else{
+            return false;
+        }
+    }
     deleteValue(){
         const {deleteItem, index} = this.props;
         deleteItem(index);

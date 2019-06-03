@@ -13,6 +13,7 @@ class Todu extends Component{
     }
 
     render() {
+        console.log('father')
         return (
             <Fragment>
                 <div>
