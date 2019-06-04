@@ -29,6 +29,7 @@
     ]
   },
   "devDependencies": {
+    "antd": "^3.19.2",
     "react-transition-group": "^4.1.0"
   }
 }

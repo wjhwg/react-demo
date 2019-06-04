@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 // import ToDu from './ToDu'
-import Animation from './animation'
+// import Animation from './animation'
+import AntDesigin from './antDesigin'
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<Animation />, document.getElementById('root'));
+ReactDOM.render(<AntDesigin />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
