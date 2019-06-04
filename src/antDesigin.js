@@ -1,19 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import 'antd/dist/antd.css';
 import { Input, Button, List, Typography } from 'antd';
-
-const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
-  ];
+import store from './store'
 
 
 class AntDesigin extends Component{
     constructor(props){
         super(props);
+        this.state = store.getState();
     }
 
     render() {
@@ -28,7 +22,7 @@ class AntDesigin extends Component{
                     footer={<div>Footer</div>}
                     style={{width: '400px', marginLeft: '20px'}}
                     bordered
-                    dataSource={data}
+                    dataSource={this.state.list}
                     renderItem={item => (
                         <List.Item>
                         <Typography.Text mark>[ITEM]</Typography.Text> {item}
