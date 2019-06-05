@@ -8,13 +8,16 @@ class AntDesigin extends Component{
     constructor(props){
         super(props);
         this.state = store.getState();
+        this.handlerChange = this.handlerChange.bind(this);
+        this.storeChange = this.storeChange.bind(this);
+        store.subscribe(this.storeChange);
     }
 
     render() {
         return (
             <Fragment>
                 <div style={{ margin: '20px'}}>
-                    <Input placeholder="Basic usage" style={{width: '400px', marginRight: '20px'}}/>
+                    <Input placeholder="Basic usage" value={this.state.inputValue} onChange={this.handlerChange} style={{width: '400px', marginRight: '20px'}}/>
                     <Button type="primary">Primary</Button>
                 </div>
                 <List
@@ -33,6 +36,16 @@ class AntDesigin extends Component{
         )
     }
 
+    handlerChange(e) {
+        const action = {
+            type: 'change_input_value',
+            value: e.target.value
+        }
+        store.dispatch(action);
+    }
+    storeChange(){
+        this.setState(store.getState());
+    }
 }
 
 export default AntDesigin;
