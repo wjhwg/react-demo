@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import 'antd/dist/antd.css';
 import { Input, Button, List, Typography } from 'antd';
 import store from './store'
-
+import { CHANGE_INPUT, CHANGE_ITEN, DELETE_ITEM} from './store/actionType'
 
 class AntDesigin extends Component{
     constructor(props){
@@ -39,7 +39,7 @@ class AntDesigin extends Component{
 
     handlerChange(e) {
         const action = {
-            type: 'change_input_value',
+            type: CHANGE_INPUT,
             value: e.target.value
         }
         store.dispatch(action);
@@ -49,13 +49,13 @@ class AntDesigin extends Component{
     }
     handlerClick(){
         const action = {
-            type: 'change_item'
+            type: CHANGE_ITEN
         }
         store.dispatch(action);
     }
     deleteItem(index){
         const action = {
-            type: 'delete_item',
+            type: DELETE_ITEM,
             index
         }
         store.dispatch(action);
