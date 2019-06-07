@@ -1,4 +1,4 @@
-import { CHANGE_INPUT, CHANGE_ITEN, DELETE_ITEM} from './actionType'
+import { CHANGE_INPUT, CHANGE_ITEN, DELETE_ITEM, INIT_LIST} from './actionType'
 
 const defaultState = {
     inputValue: '',
@@ -11,9 +11,15 @@ export default (state = defaultState, action) => {
         newState.inputValue = action.value;
         return newState;
     };
+    if(action.type === INIT_LIST){
+        const newState = JSON.parse(JSON.stringify(state));
+        newState.list = action.data;
+        return newState;
+    ;}
     if(action.type === CHANGE_ITEN){
         const newState = JSON.parse(JSON.stringify(state));
-        newState.list.push(newState.inputValue);
+        console.log(action)
+        newState.list.push(action.obj);
         newState.inputValue = '';
         return newState;
     }

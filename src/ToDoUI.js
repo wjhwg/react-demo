@@ -7,7 +7,9 @@ const ToDoUI = (props) => {
         <Fragment>
             <div style={{ margin: '20px'}}>
                 <Input placeholder="Basic usage" value={props.InputValue} onChange={props.handlerChange} style={{width: '400px', marginRight: '20px'}}/>
-                <Button type="primary" onClick={props.handlerClick}>Primary</Button>
+                <Button type="primary" onClick={() => { 
+                    const obj = { email: props.InputValue}
+                    props.handlerClick(obj)}}>Primary</Button>
             </div>
             <List
                 header={<div>Header</div>}
@@ -17,7 +19,7 @@ const ToDoUI = (props) => {
                 dataSource={props.List}
                 renderItem={(item, index) => (
                     <List.Item onClick={() => {props.deleteItem(index)}}>
-                    <Typography.Text mark>[ITEM]</Typography.Text> {item}
+                    <Typography.Text mark>[ITEM]</Typography.Text> {item.email}
                     </List.Item>
                 )}
             />
