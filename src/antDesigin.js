@@ -1,6 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import 'antd/dist/antd.css';
-import { Input, Button, List, Typography } from 'antd';
+import React, { Component } from 'react';
+import TodoUI from './ToDoUI'
 import store from './store'
 import {changeInputValue, changeItem, deleteItem} from './store/actionCreator';
 
@@ -11,29 +10,18 @@ class AntDesigin extends Component{
         this.handlerChange = this.handlerChange.bind(this);
         this.storeChange = this.storeChange.bind(this);
         this.handlerClick = this.handlerClick.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
         store.subscribe(this.storeChange);
     }
 
     render() {
         return (
-            <Fragment>
-                <div style={{ margin: '20px'}}>
-                    <Input placeholder="Basic usage" value={this.state.inputValue} onChange={this.handlerChange} style={{width: '400px', marginRight: '20px'}}/>
-                    <Button type="primary" onClick={this.handlerClick}>Primary</Button>
-                </div>
-                <List
-                    header={<div>Header</div>}
-                    footer={<div>Footer</div>}
-                    style={{width: '400px', marginLeft: '20px'}}
-                    bordered
-                    dataSource={this.state.list}
-                    renderItem={(item, index) => (
-                        <List.Item onClick={this.deleteItem.bind(this, index)}>
-                        <Typography.Text mark>[ITEM]</Typography.Text> {item}
-                        </List.Item>
-                    )}
-                />
-            </Fragment>
+           <TodoUI InputValue= {this.state.inputValue}
+                    List = {this.state.list}
+                    handlerChange = {this.handlerChange}
+                    handlerClick = {this.handlerClick}
+                    deleteItem = {this.deleteItem}
+           ></TodoUI>
         )
     }
 
@@ -49,6 +37,7 @@ class AntDesigin extends Component{
         store.dispatch(action);
     }
     deleteItem(index){
+        console.log(index)
         const action = deleteItem(index);
         store.dispatch(action);
     }
