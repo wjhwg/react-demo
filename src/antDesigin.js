@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TodoUI from './ToDoUI'
 import store from './store'
 import {changeInputValue, changeItem, deleteItem} from './store/actionCreator';
-
+import axios from 'axios';
 class AntDesigin extends Component{
     constructor(props){
         super(props);
@@ -40,6 +40,12 @@ class AntDesigin extends Component{
         console.log(index)
         const action = deleteItem(index);
         store.dispatch(action);
+    }
+
+    componentDidMount(){
+        axios.get('https://easy-mock.com/mock/5cf9e614e1c8fb7c385666f9/example/mock').then(() => {
+
+        })
     }
 }
 
