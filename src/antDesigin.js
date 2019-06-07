@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import TodoUI from './ToDoUI'
 import store from './store'
-import {changeInputValue, changeItem, deleteItem, initList} from './store/actionCreator';
-import axios from 'axios';
+import {getInitList, changeInputValue, changeItem, deleteItem, initList} from './store/actionCreator';
 class AntDesigin extends Component{
     constructor(props){
         super(props);
@@ -41,13 +40,8 @@ class AntDesigin extends Component{
         store.dispatch(action);
     }
     componentDidMount(){
-        axios.get('https://easy-mock.com/mock/5cf9e614e1c8fb7c385666f9/example/mock').then((res) => {
-            if(res.data.success === true){
-                const data = res.data.data.projects;
-                const action = initList(data);
-                store.dispatch(action);
-            }
-        })
+        const action = getInitList();
+        store.dispatch(action);
     }
 }
 
